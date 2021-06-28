@@ -4,11 +4,13 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.view.View;
+import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -21,18 +23,20 @@ public class MainActivity extends AppCompatActivity {
     SwitchMaterial inputSecond;
     boolean oneIn, twoIn;
 
-
+    @SuppressLint("HandlerLeak")
     Handler mHandler = new Handler() {
+        @SuppressLint("HandlerLeak")
         @Override
         public void handleMessage(@NonNull Message msg) {
-            float[] res = msg.getData().getFloatArray("res");
+
+             float[] res = msg.getData().getFloatArray("res");
             setText(res[0]);
 
         }
     };
 
     private void setText(float re) {
-        if (re >= 0.8) {
+        if (re >= 0.5) {
             tw_res.setTextColor(Color.GREEN);
             tw_res.setText("T");
         } else {
@@ -54,12 +58,21 @@ public class MainActivity extends AppCompatActivity {
         });
         inputSecond = findViewById(R.id.second_input);
         inputSecond.setOnCheckedChangeListener(
-                new CompoundButton.OnCheckedChangeListener() {
-                    @Override
-                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                        twoIn = !twoIn;
-                    }
-                });
+                (buttonView, isChecked) -> twoIn = !twoIn);
+
+
+        Button b = findViewById(R.id.button);
+        b.setOnClickListener((v) -> {
+            Intent i = new Intent(this, MainActivity2.class);
+            startActivity(i);
+        });
+
+        Button mnist = findViewById(R.id.bt_mnist);
+        mnist.setOnClickListener((view -> {
+            Intent i = new Intent(this, Mnist.class);
+            startActivity(i);
+        }));
+
     }
 
     public void startNetwork(View view) {

@@ -21,17 +21,15 @@
         <com.google.android.material.switchmaterial.SwitchMaterial
             android:id="@+id/first_input"
             android:layout_width="50dp"
-            android:layout_height="30dp"
-            android:layout_marginHorizontal="54dp"
-            android:text="Первый вход" />
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="54dp" />
 
 
         <com.google.android.material.switchmaterial.SwitchMaterial
             android:id="@+id/second_input"
             android:layout_width="50dp"
-            android:layout_height="30dp"
-            android:layout_marginHorizontal="124dp"
-            android:text="Второй вход " />
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="124dp" />
 
     </LinearLayout>
 
@@ -48,13 +46,35 @@
         app:layout_constraintTop_toTopOf="parent" />
 
 
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Start"
-        android:onClick="startNetwork"
-        android:layout_marginHorizontal="13dp"
-        app:layout_constraintTop_toBottomOf="@id/tv_output"
-        android:layout_marginVertical="54dp"/>
+    <LinearLayout
+        android:layout_width="409dp"
+        android:layout_height="166dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_output">
+
+        <Button
+            android:id="@+id/bt_mnist"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.3"
+            android:text="Mnist" />
+
+        <Button
+            android:id="@+id/button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.3"
+            android:text="Next" />
+
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="startNetwork"
+            android:layout_weight="0.3"
+            android:text="Start" />
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

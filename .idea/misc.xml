@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_12" default="true" project-jdk-name="12" project-jdk-type="JavaSDK">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Projects/android/TensorFlowLiteTest/app/src/main/res/drawable/shape_rect_border.xml" value="0.13055555555555556" />
+        <entry key="..\:/Projects/android/TensorFlowLiteTest/app/src/main/res/layout/activity_main.xml" value="0.24320652173913043" />
+        <entry key="..\:/Projects/android/TensorFlowLiteTest/app/src/main/res/layout/activity_main2.xml" value="0.23731884057971014" />
+        <entry key="..\:/Projects/android/TensorFlowLiteTest/app/src/main/res/layout/activity_mnist.xml" value="0.23143115942028986" />
+        <entry key="..\:/Projects/android/TensorFlowLiteTest/app/src/main/res/layout/item.xml" value="0.4600694444444444" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="12" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">
