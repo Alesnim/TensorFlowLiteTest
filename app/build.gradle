@@ -58,6 +58,7 @@ dependencies {
 
     implementation 'com.nex3z:finger-paint-view:0.1.0'
 
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
 
     // implementation 'com.github.divyanshub024:AndroidDraw:v0.1'
     implementation 'org.tensorflow:tensorflow-lite:2.4.0'
