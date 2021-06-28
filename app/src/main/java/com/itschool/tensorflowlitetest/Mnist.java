@@ -1,5 +1,7 @@
 package com.itschool.tensorflowlitetest;
 
+import static com.itschool.tensorflowlitetest.PredictTask.context;
+
 import android.annotation.SuppressLint;
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -14,6 +16,9 @@ import com.itschool.tensorflowlitetest.classifier.Classifier;
 import com.itschool.tensorflowlitetest.classifier.Device;
 import com.itschool.tensorflowlitetest.classifier.Recognition;
 import com.nex3z.fingerpaintview.FingerPaintView;
+
+import org.tensorflow.lite.DataType;
+import org.tensorflow.lite.support.tensorbuffer.TensorBuffer;
 
 public class Mnist extends AppCompatActivity {
 
@@ -74,11 +79,12 @@ public class Mnist extends AppCompatActivity {
         predText.setText(R.string.empty);
         probability.setText(R.string.empty);
         timeCost.setText(R.string.empty);
+
     }
 
     private void initClassifier() {
         try {
-            classifier = new Classifier(this, Device.CPU, 4);
+            classifier = new Classifier(this, Device.CPU, 4, "mnist.tflite");
             Log.v(LOG_TAG, "Classifier initialized");
         } catch (Exception e) {
             Toast.makeText(this, R.string.failed_to_create_classifier, Toast.LENGTH_LONG).show();

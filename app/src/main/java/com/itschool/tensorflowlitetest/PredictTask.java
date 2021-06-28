@@ -8,9 +8,11 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 
-import com.itschool.tensorflowlitetest.ml.ConvertedModel2;
+import com.itschool.tensorflowlitetest.classifier.Classifier;
+import com.itschool.tensorflowlitetest.classifier.Device;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
+import org.checkerframework.checker.units.qual.C;
 import org.tensorflow.lite.Interpreter;
 import org.tensorflow.lite.support.tensorbuffer.TensorBuffer;
 
@@ -73,18 +75,21 @@ public class PredictTask extends AsyncTask<Void, Void, @NonNull float[]> {
         TensorBuffer tensorBuffer = TensorBuffer.createFixedSize(new int[]{1, 1, 2},
                 interpreter.getInputTensor(0).dataType());
         tensorBuffer.loadBuffer(temp);
-        ConvertedModel2 model = null;
-
-        try {
-            model = ConvertedModel2.newInstance(context);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        ConvertedModel2.Outputs outputs = model.process(tensorBuffer);
-
-        TensorBuffer outputFeature0 = outputs.getOutputFeature0AsTensorBuffer();
-
-        return outputFeature0.getFloatArray();
+        Classifier classifier = new Classifier(context, Device.CPU, 4, "converted_model2.tflite");
+        return new float[]{0,0,0};
+//        ConvertedModel2 model = null;
+//
+//
+//        try {
+//            model = ConvertedModel2.newInstance(context);
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//        ConvertedModel2.Outputs outputs = model.process(tensorBuffer);
+//
+//        TensorBuffer outputFeature0 = outputs.getOutputFeature0AsTensorBuffer();
+//
+//        return outputFeature0.getFloatArray();
     }
 
 

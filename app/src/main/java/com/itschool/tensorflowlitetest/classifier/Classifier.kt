@@ -16,10 +16,11 @@ import java.io.Closeable
 import java.nio.ByteBuffer
 import java.nio.ByteOrder
 
-public class Classifier(
+class Classifier(
         context: Context,
         device: Device = Device.CPU,
-        numThreads: Int = 4
+        numThreads: Int = 4,
+        modelname: String
 ) {
 
     private val delegate: Delegate? = when (device) {
@@ -29,7 +30,7 @@ public class Classifier(
     }
 
     private val interpreter: Interpreter = Interpreter(
-            FileUtil.loadMappedFile(context, MODEL_FILE_NAME),
+            FileUtil.loadMappedFile(context, modelname),
             Interpreter.Options().apply {
                 setNumThreads(numThreads)
                 delegate?.let { addDelegate(it) }
@@ -97,11 +98,11 @@ public class Classifier(
 
     companion object {
         private val LOG_TAG: String = Classifier::class.java.simpleName
-        private const val MODEL_FILE_NAME: String = "mnist.tflite"
+        val MODEL_FILE_NAME: String = "mnist.tflite"
     }
 }
 
 fun FloatArray.argMax(): Int {
-    return this.withIndex().maxBy { it.value }?.index
+    return this.withIndex().maxByOrNull { it.value }?.index
             ?: throw IllegalArgumentException("Cannot find arg max in empty list")
 }
