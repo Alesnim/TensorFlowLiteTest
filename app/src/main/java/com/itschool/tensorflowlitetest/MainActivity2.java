@@ -27,6 +27,7 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -182,7 +183,7 @@ public class MainActivity2 extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
     }
 
-    @SuppressLint("DefaultLocale")
+    @SuppressLint({"DefaultLocale", "NotifyDataSetChanged"})
     private void updateGraph(float val) {
         Log.d("TAG", String.valueOf(val));
 //        seriesData.add(new Entry(xAxis.get(curr), val));
@@ -196,7 +197,7 @@ public class MainActivity2 extends AppCompatActivity {
         chart.getAxisLeft().setAxisMinimum(60);
         chart.invalidate();
         tests.add(String.format("%03d: test val %d/epoch loss: %f", curr, curr, val*0.001) );
-        recyclerView.getAdapter().notifyDataSetChanged();
+        Objects.requireNonNull(recyclerView.getAdapter()).notifyDataSetChanged();
 //        Set set = Set.instantiate();
 //        set.data(seriesData);
 //        series1Mapping = set.mapAs("{ x: 'x', value: 'value' }");

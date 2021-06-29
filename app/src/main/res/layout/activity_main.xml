@@ -14,19 +14,22 @@
         android:layout_marginVertical="222dp"
         android:gravity="center_vertical"
         android:orientation="horizontal"
+        android:layout_marginHorizontal="4dp"
         app:layout_constraintTop_toTopOf="parent"
 
         >
 
         <com.google.android.material.switchmaterial.SwitchMaterial
             android:id="@+id/first_input"
-            android:layout_width="50dp"
+            android:text="Tensorflow Acelerate"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="54dp" />
+            android:layout_marginHorizontal="4dp" />
 
 
         <com.google.android.material.switchmaterial.SwitchMaterial
             android:id="@+id/second_input"
+            android:visibility="invisible"
             android:layout_width="50dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="124dp" />
@@ -38,7 +41,7 @@
         android:id="@+id/tv_output"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
+        android:text=""
         android:textSize="44sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
