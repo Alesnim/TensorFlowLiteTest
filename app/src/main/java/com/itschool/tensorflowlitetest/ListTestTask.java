@@ -26,7 +26,9 @@ public class ListTestTask extends AsyncTask<Void, Float, @NonNull float[]> {
         for (int i = 0; i < 100; i++) {
             try {
                 Thread.sleep(4);
-                res[i] = ((float) ThreadLocalRandom.current().nextInt(88, 98 + 1));
+                if (i <= 40 ) res[i] = ((float) ThreadLocalRandom.current().nextInt(89, 93 + 1));
+                if (i > 40 && i <= 60) res[i] = ((float) ThreadLocalRandom.current().nextInt(93, 95 + 1));
+                if (i > 60) res[i] = ((float) ThreadLocalRandom.current().nextInt(95, 97 + 1));
                 publishProgress(res[i]);
             } catch (InterruptedException e) {
                 e.printStackTrace();

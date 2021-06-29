@@ -1,11 +1,5 @@
 package com.itschool.tensorflowlitetest;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.annotation.SuppressLint;
 import android.os.Build;
 import android.os.Bundle;
@@ -14,19 +8,14 @@ import android.os.Message;
 import android.util.Log;
 import android.widget.TextView;
 
-import com.anychart.AnyChart;
-import com.anychart.AnyChartView;
-import com.anychart.chart.common.dataentry.DataEntry;
-import com.anychart.chart.common.dataentry.SingleValueDataSet;
+import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.anychart.chart.common.dataentry.ValueDataEntry;
-import com.anychart.charts.Cartesian;
-import com.anychart.core.cartesian.series.Line;
 import com.anychart.data.Mapping;
-import com.anychart.data.Set;
-import com.anychart.enums.Anchor;
-import com.anychart.enums.MarkerType;
-import com.anychart.enums.TooltipPositionMode;
-import com.anychart.graphics.vector.Stroke;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.Entry;
@@ -34,16 +23,11 @@ import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.utils.ColorTemplate;
 
-import android.widget.TextView;
-
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 public class MainActivity2 extends AppCompatActivity {
@@ -66,27 +50,15 @@ public class MainActivity2 extends AppCompatActivity {
     private Mapping series1Mapping;
     private LineDataSet set1;
     private LineDataSet lineDataSet;
+    @SuppressLint({"NewApi", "LocalSuppress"})
+    private List<String> tests;
 
-    private void updateGraph(float val) {
-        Log.d("TAG", String.valueOf(val));
-//        seriesData.add(new Entry(xAxis.get(curr), val));
-        lineDataSet.addEntry(new Entry((float) xAxis.get(curr), val));
-        lineDataSet.notifyDataSetChanged();
-//        set1 = (LineDataSet) chart.getData().getDataSetByIndex(0);
-//        set1.setValues(seriesData);
-//        set1.notifyDataSetChanged();
-        chart.getData().notifyDataChanged();
-        chart.notifyDataSetChanged();
-        chart.invalidate();
-//        Set set = Set.instantiate();
-//        set.data(seriesData);
-//        series1Mapping = set.mapAs("{ x: 'x', value: 'value' }");
-        if (curr < 99) curr++;
-    }
+
 
     private List<Float> res = new ArrayList<>();
     private Map<String, Float> result;
     private LineChart chart;
+    private RecyclerView recyclerView;
 
     @SuppressLint("SetTextI18n")
     @RequiresApi(api = Build.VERSION_CODES.N)
@@ -120,6 +92,7 @@ public class MainActivity2 extends AppCompatActivity {
         chart = findViewById(R.id.chart);
         YAxis rightYAxis = chart.getAxisLeft();
         rightYAxis.setLabelCount(7);
+        chart.getXAxis().setAxisMinimum(80);
         chart.getXAxis().setLabelRotationAngle(90);
         chart.getXAxis().setGranularityEnabled(true);
         chart.getXAxis().setGranularity(100f);
@@ -200,13 +173,35 @@ public class MainActivity2 extends AppCompatActivity {
 
 //        anyChartView.setChart(cartesian);
 
-        @SuppressLint({"NewApi", "LocalSuppress"}) List<String> tests = List.of("01: test val 4/epoch loss: 0.0924", "02: test val 5/epoch loss:0.0932");
+        tests = new ArrayList<>();
 
-        RecyclerView recyclerView = findViewById(R.id.recyclerView);
+        recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         MyRecycleViewAdapter adapter = new MyRecycleViewAdapter(this, tests);
 
         recyclerView.setAdapter(adapter);
+    }
+
+    @SuppressLint("DefaultLocale")
+    private void updateGraph(float val) {
+        Log.d("TAG", String.valueOf(val));
+//        seriesData.add(new Entry(xAxis.get(curr), val));
+        lineDataSet.addEntry(new Entry((float) xAxis.get(curr), val));
+        lineDataSet.notifyDataSetChanged();
+//        set1 = (LineDataSet) chart.getData().getDataSetByIndex(0);
+//        set1.setValues(seriesData);
+//        set1.notifyDataSetChanged();
+        chart.getData().notifyDataChanged();
+        chart.notifyDataSetChanged();
+        chart.getAxisLeft().setAxisMinimum(60);
+        chart.invalidate();
+        tests.add(String.format("%03d: test val %d/epoch loss: %f", curr, curr, val*0.001) );
+        recyclerView.getAdapter().notifyDataSetChanged();
+//        Set set = Set.instantiate();
+//        set.data(seriesData);
+//        series1Mapping = set.mapAs("{ x: 'x', value: 'value' }");
+        if (curr < 99) curr++;
+
     }
 
     private class CustomDataEntry extends ValueDataEntry {
